@@ -29,6 +29,22 @@
 
 #include "strbuf.h"
 
+#ifdef _MSC_VER
+	#if (_MSC_VER < 1800)
+		#define strtoll		_strtoi64
+		#define strtoull	_strtoui64
+		#define strtold		(long double)strtod
+		#define strtof		(float)strtod
+	#endif
+
+	#if (_MSC_VER < 1900)
+		#ifndef snprintf
+			#define snprintf	_snprintf
+			#define vsnprintf	_vsnprintf
+		#endif
+	#endif
+#endif
+
 static void die(const char *fmt, ...)
 {
     va_list arg;

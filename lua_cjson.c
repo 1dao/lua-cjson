@@ -45,6 +45,27 @@
 
 #include "strbuf.h"
 #include "fpconv.h"
+#include "puss_plugin.h"
+
+#define ENABLE_CJSON_GLOBAL
+
+#ifdef _MSC_VER
+#include <float.h>
+#ifndef isnan
+#define isnan _isnan
+#endif
+
+#define inline __forceinline
+#define MISSING_ISINF
+
+#if (_MSC_VER < 1900)
+#define snprintf _snprintf
+#endif
+#ifdef _MSC_VER
+#define strncasecmp _strnicmp
+#endif
+
+#endif
 
 #ifndef CJSON_MODNAME
 #define CJSON_MODNAME   "cjson"
